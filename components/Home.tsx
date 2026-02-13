@@ -3,7 +3,8 @@ import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { 
   SparklesIcon, TerminalIcon, BeakerIcon, WorkflowIcon, 
-  GlobeIcon, ArrowRightIcon, CpuIcon, GridIcon, CheckIcon
+  GlobeIcon, ArrowRightIcon, CpuIcon, GridIcon, CheckIcon,
+  ImageIcon, VideoIcon
 } from './Icons';
 
 interface HomeProps {
@@ -38,6 +39,24 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       description: 'Deep web research prompts. Force academic sources and filter out SEO noise.',
       icon: GlobeIcon,
       color: 'cyan',
+      size: 'md'
+    },
+    {
+      id: 'image-gen',
+      name: 'Image Prompter',
+      tag: 'Creative',
+      description: 'Midjourney & Stable Diffusion prompts with style, lighting, and negative prompt handling.',
+      icon: ImageIcon,
+      color: 'pink',
+      size: 'md'
+    },
+    {
+      id: 'video-gen',
+      name: 'Video Director',
+      tag: 'Creative',
+      description: 'Cinematic prompts for Runway & Sora. Control camera, motion, and temporal consistency.',
+      icon: VideoIcon,
+      color: 'purple',
       size: 'md'
     },
     {

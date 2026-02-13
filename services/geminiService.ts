@@ -13,6 +13,10 @@ import {
   N8nAgentResponse,
   PerplexityRequestConfig,
   PerplexityResponse,
+  ImagePromptRequestConfig,
+  ImagePromptResponse,
+  VideoPromptRequestConfig,
+  VideoPromptResponse,
   AppSettings
 } from "../types";
 
@@ -428,6 +432,91 @@ export const generatePerplexityPrompt = async (config: PerplexityRequestConfig, 
   } catch (error) {
     if ((error as Error).message === 'Aborted') throw error;
     console.error("Error generating perplexity prompt:", error);
+    throw error;
+  }
+};
+
+// --- Feature: Image Prompt Generator ---
+export const generateImagePrompt = async (config: ImagePromptRequestConfig, signal?: AbortSignal): Promise<ImagePromptResponse> => {
+  const targetLanguage = config.language || "English";
+  const systemInstruction = `
+    You are an expert Digital Art Director and Prompt Engineer for Midjourney, DALL-E 3, and Stable Diffusion.
+    Create highly detailed, stylized prompts optimized for each model's specific syntax (e.g., --ar for Midjourney, negative prompts for SD).
+    Return strict JSON.
+  `;
+
+  const userPrompt = `
+    Subject: "${config.description}"
+    Art Style: "${config.artStyle}"
+    Mood/Lighting: "${config.mood}"
+    Aspect Ratio: "${config.aspectRatio}"
+    Language: ${targetLanguage} (Translate prompts to English if needed for models, but keep explanation in target language).
+  `;
+
+  const schema = {
+    type: Type.OBJECT,
+    properties: {
+      midjourneyPrompt: { type: Type.STRING },
+      dallePrompt: { type: Type.STRING },
+      stableDiffusionPrompt: { type: Type.STRING },
+      negativePrompt: { type: Type.STRING },
+      parameterTips: { type: Type.STRING }
+    },
+    required: ["midjourneyPrompt", "dallePrompt", "stableDiffusionPrompt", "negativePrompt", "parameterTips"]
+  };
+
+  try {
+    const jsonText = await generateContentUniversal(systemInstruction, userPrompt, schema, undefined, signal);
+    return JSON.parse(cleanJsonOutput(jsonText)) as ImagePromptResponse;
+  } catch (error) {
+    if ((error as Error).message === 'Aborted') throw error;
+    console.error("Error generating image prompt:", error);
+    throw error;
+  }
+};
+
+// --- Feature: Video Prompt Generator ---
+export const generateVideoPrompt = async (config: VideoPromptRequestConfig, signal?: AbortSignal): Promise<VideoPromptResponse> => {
+  const targetLanguage = config.language || "English";
+  const systemInstruction = `
+    You are an expert Video Production Prompter for AI models like Runway Gen-2, Pika Labs, and OpenAI Sora.
+    Focus on describing motion, camera angles (pan, zoom, tilt), and temporal consistency.
+    Return strict JSON.
+  `;
+
+  const userPrompt = `
+    Scene Description: "${config.description}"
+    Motion Level: ${config.motionLevel}
+    Camera Movement: ${config.cameraMovement}
+    Duration: ${config.duration}
+    Language: ${targetLanguage}.
+  `;
+
+  const schema = {
+    type: Type.OBJECT,
+    properties: {
+      runwayPrompt: { type: Type.STRING },
+      pikaPrompt: { type: Type.STRING },
+      soraPrompt: { type: Type.STRING },
+      technicalSettings: {
+        type: Type.OBJECT,
+        properties: {
+          cameraControl: { type: Type.STRING },
+          motionBucket: { type: Type.STRING },
+          fps: { type: Type.STRING }
+        },
+        required: ["cameraControl", "motionBucket", "fps"]
+      }
+    },
+    required: ["runwayPrompt", "pikaPrompt", "soraPrompt", "technicalSettings"]
+  };
+
+  try {
+    const jsonText = await generateContentUniversal(systemInstruction, userPrompt, schema, undefined, signal);
+    return JSON.parse(cleanJsonOutput(jsonText)) as VideoPromptResponse;
+  } catch (error) {
+    if ((error as Error).message === 'Aborted') throw error;
+    console.error("Error generating video prompt:", error);
     throw error;
   }
 };

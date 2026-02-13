@@ -94,3 +94,40 @@ export interface PerplexityResponse {
   searchOperators: string[]; // e.g. "site:gov", "after:2023"
   explanation: string;
 }
+
+// --- Image Generator Types ---
+export interface ImagePromptRequestConfig {
+  description: string;
+  artStyle: string; // e.g., Photorealistic, Anime, Oil Painting
+  mood: string;
+  aspectRatio: string;
+  language?: string;
+}
+
+export interface ImagePromptResponse {
+  midjourneyPrompt: string;
+  dallePrompt: string;
+  stableDiffusionPrompt: string;
+  negativePrompt: string; // Specifically for SD
+  parameterTips: string;
+}
+
+// --- Video Generator Types ---
+export interface VideoPromptRequestConfig {
+  description: string;
+  motionLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  cameraMovement: 'ZOOM' | 'PAN' | 'TILT' | 'STATIC' | 'FPV';
+  duration: 'SHORT' | 'LONG';
+  language?: string;
+}
+
+export interface VideoPromptResponse {
+  runwayPrompt: string;
+  pikaPrompt: string;
+  soraPrompt: string;
+  technicalSettings: {
+    cameraControl: string;
+    motionBucket: string;
+    fps: string;
+  };
+}

@@ -5,16 +5,18 @@ import DevAgentScripter from './components/DevAgentScripter';
 import PromptSentinel from './components/PromptSentinel';
 import N8nAgentGenerator from './components/N8nAgentGenerator';
 import PerplexityArchitect from './components/PerplexityArchitect';
+import ImagePromptGenerator from './components/ImagePromptGenerator';
+import VideoPromptGenerator from './components/VideoPromptGenerator';
 import HowItWorks from './components/HowItWorks';
 import Home from './components/Home';
 import SettingsModal from './components/SettingsModal';
 import { 
   SparklesIcon, ChevronDownIcon, HomeIcon, TerminalIcon, 
   BeakerIcon, WorkflowIcon, SettingsIcon, GlobeIcon, 
-  SunIcon, MoonIcon
+  SunIcon, MoonIcon, ImageIcon, VideoIcon
 } from './components/Icons';
 
-type ViewType = 'home' | 'architect' | 'agent' | 'sentinel' | 'n8n' | 'perplexity' | 'how-it-works';
+type ViewType = 'home' | 'architect' | 'agent' | 'sentinel' | 'n8n' | 'perplexity' | 'image-gen' | 'video-gen' | 'how-it-works';
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('home');
@@ -98,7 +100,7 @@ function App() {
                {isMenuOpen && (
                  <>
                    <div className="fixed inset-0 z-10" onClick={() => setIsMenuOpen(false)}></div>
-                   <div className="absolute right-0 mt-3 w-72 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl dark:shadow-black/50 border border-slate-100 dark:border-slate-800 p-2 z-20 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+                   <div className="absolute right-0 mt-3 w-72 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl dark:shadow-black/50 border border-slate-100 dark:border-slate-800 p-2 z-20 animate-in fade-in zoom-in-95 duration-200 origin-top-right overflow-y-auto max-h-[80vh]">
                      <div className="px-3 py-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Generators</div>
                      <button onClick={() => navigateTo('architect')} className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-800 text-left">
                         <SparklesIcon className="w-4 h-4 text-indigo-500" />
@@ -107,6 +109,16 @@ function App() {
                      <button onClick={() => navigateTo('agent')} className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm transition-all mt-1 hover:bg-slate-50 dark:hover:bg-slate-800 text-left">
                         <TerminalIcon className="w-4 h-4 text-emerald-500" />
                         <span>DevAgent Scripter</span>
+                     </button>
+                     <div className="my-2 border-t border-slate-100 dark:border-slate-800"></div>
+                     <div className="px-3 py-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest text-left">Creative</div>
+                     <button onClick={() => navigateTo('image-gen')} className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-800 text-left">
+                        <ImageIcon className="w-4 h-4 text-pink-500" />
+                        <span>Image Prompter</span>
+                     </button>
+                     <button onClick={() => navigateTo('video-gen')} className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm transition-all mt-1 hover:bg-slate-50 dark:hover:bg-slate-800 text-left">
+                        <VideoIcon className="w-4 h-4 text-purple-500" />
+                        <span>Video Director</span>
                      </button>
                      <div className="my-2 border-t border-slate-100 dark:border-slate-800"></div>
                      <div className="px-3 py-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest text-left">Research & Audit</div>
@@ -150,6 +162,8 @@ function App() {
         {currentView === 'sentinel' && <div className="pt-10 animate-fade-in"><PromptSentinel /></div>}
         {currentView === 'perplexity' && <div className="pt-10 animate-fade-in"><PerplexityArchitect /></div>}
         {currentView === 'n8n' && <div className="pt-10 animate-fade-in"><N8nAgentGenerator /></div>}
+        {currentView === 'image-gen' && <div className="pt-10 animate-fade-in"><ImagePromptGenerator /></div>}
+        {currentView === 'video-gen' && <div className="pt-10 animate-fade-in"><VideoPromptGenerator /></div>}
       </main>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
