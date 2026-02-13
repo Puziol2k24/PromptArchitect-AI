@@ -1,6 +1,11 @@
-# PromptArchitect AI 🏛️ v3.5
+# PromptArchitect AI 🏛️ v3.5 (Beta)
 
 **PromptArchitect AI** is a professional-grade prompt engineering suite designed to bridge the gap between messy human intent and high-performance machine reasoning. It utilizes advanced meta-prompting techniques to optimize instructions for the world's most capable models, powered primarily by **Google Gemini (gemini-flash-lite-latest)**.
+
+> ⚠️ **Beta Version Notice**: This project is currently in beta. For optimal performance and reliability, we strongly recommend using your own API key from one of the supported providers:
+> - **Google Gemini** (Primary) - Get your free API key from [Google AI Studio](https://aistudio.google.com/)
+> - **OpenAI** (GPT-4, GPT-3.5) - Available at [OpenAI Platform](https://platform.openai.com/)
+> - **Anthropic Claude** - Available at [Anthropic Console](https://console.anthropic.com/)
 
 ---
 
@@ -51,23 +56,47 @@ The bridge between visual automation and agentic logic. Analyzes **n8n** workflo
 ### Prerequisites
 
 *   **Node.js**: v18 or higher.
-*   **API Key**: A valid Google Gemini API Key (get it from [AI Studio](https://aistudio.google.com/)).
+*   **API Key**: Choose one of the following providers and obtain an API key:
+    - **Google Gemini** (Recommended): [AI Studio](https://aistudio.google.com/)
+    - **OpenAI**: [OpenAI Platform](https://platform.openai.com/api-keys)
+    - **Anthropic Claude**: [Anthropic Console](https://console.anthropic.com/)
 
-### Environment Setup
+### API Configuration
 
-The application requires an environment variable named `API_KEY`.
+You can configure your API key in two ways:
 
-#### Mac / Linux:
+#### Option 1: Frontend Configuration (Recommended)
+1. Run the application: `npm run dev`
+2. Open the app in your browser
+3. Click the **Settings ⚙️** icon in the top-right corner
+4. Select your AI provider (Gemini, OpenAI, or Claude)
+5. Enter your API key
+6. Click "Save Configuration"
+
+Your API key will be stored securely in your browser's local storage.
+
+#### Option 2: Backend Environment Variable
+Set the `API_KEY` environment variable before starting the application:
+
+**Mac / Linux:**
 ```bash
 export API_KEY="your_api_key_here"
 npm run dev
 ```
 
-#### Windows (PowerShell):
+**Windows (PowerShell):**
 ```powershell
 $env:API_KEY="your_api_key_here"
 npm run dev
 ```
+
+**Windows (Command Prompt):**
+```cmd
+set API_KEY=your_api_key_here
+npm run dev
+```
+
+> 💡 **Note**: Frontend configuration allows you to switch between providers without restarting the app. Environment variables are useful for server deployments or CI/CD pipelines.
 
 ---
 
