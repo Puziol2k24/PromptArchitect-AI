@@ -213,7 +213,46 @@ const PerplexityArchitect: React.FC = () => {
           </form>
         </div>
 
-        {/* ... results area ... */}
+        {/* Results Area */}
+        <AnimatePresence>
+          {result && !loading && (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="lg:col-span-2 grid grid-cols-1 gap-6"
+            >
+               {/* Prompt Output */}
+               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative">
+                 <div className="flex justify-between items-center mb-4">
+                   <h3 className="text-lg font-bold text-slate-800 dark:text-white">Optimized Search Query</h3>
+                   <button onClick={handleCopy} className="text-slate-400 hover:text-cyan-500 transition-colors">
+                     {copied ? <CheckIcon className="w-5 h-5 text-emerald-500" /> : <CopyIcon className="w-5 h-5" />}
+                   </button>
+                 </div>
+                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-sm font-mono text-slate-600 dark:text-slate-300 whitespace-pre-wrap border border-slate-100 dark:border-slate-800 mb-4">
+                   {result.optimizedPrompt}
+                 </div>
+                 
+                 {/* Operators Tags */}
+                 <div className="flex flex-wrap gap-2 mb-4">
+                    {result.searchOperators.map((op, i) => (
+                      <span key={i} className="px-2 py-1 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded text-xs font-mono border border-cyan-100 dark:border-cyan-800">
+                        {op}
+                      </span>
+                    ))}
+                 </div>
+
+                 {/* Explanation */}
+                 <div className="bg-cyan-50 dark:bg-cyan-900/10 border border-cyan-100 dark:border-cyan-800 rounded-xl p-4">
+                    <h4 className="text-xs font-bold text-cyan-700 dark:text-cyan-400 uppercase mb-2">Search Strategy</h4>
+                    <p className="text-sm text-cyan-900 dark:text-cyan-200 leading-relaxed">
+                      {result.explanation}
+                    </p>
+                 </div>
+               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

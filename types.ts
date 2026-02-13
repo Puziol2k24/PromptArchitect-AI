@@ -108,6 +108,7 @@ export interface ImagePromptResponse {
   midjourneyPrompt: string;
   dallePrompt: string;
   stableDiffusionPrompt: string;
+  geminiImagePrompt: string; // Added Gemini/Imagen prompt
   negativePrompt: string; // Specifically for SD
   parameterTips: string;
 }
@@ -125,6 +126,7 @@ export interface VideoPromptResponse {
   runwayPrompt: string;
   pikaPrompt: string;
   soraPrompt: string;
+  veoPrompt: string; // Added Google Veo
   technicalSettings: {
     cameraControl: string;
     motionBucket: string;

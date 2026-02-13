@@ -94,7 +94,7 @@ const ImagePromptGenerator: React.FC = () => {
               Image <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">Prompt Gen</span>
             </h2>
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
-              Create breathtaking visuals with specialized prompts for Midjourney, DALL-E 3, and Stable Diffusion.
+              Create breathtaking visuals with specialized prompts for Midjourney, DALL-E 3, Stable Diffusion, and Gemini.
             </p>
           </>
         )}
@@ -223,6 +223,19 @@ const ImagePromptGenerator: React.FC = () => {
                  </div>
                </div>
 
+               {/* Gemini / NanoBanana Card - ADDED */}
+               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative">
+                 <div className="flex justify-between items-center mb-4">
+                   <h3 className="text-lg font-bold text-slate-800 dark:text-white">Google Gemini (Imagen 3)</h3>
+                   <button onClick={() => handleCopy(result.geminiImagePrompt, 'gemini')} className="text-slate-400 hover:text-pink-500 transition-colors">
+                     {copiedField === 'gemini' ? <CheckIcon className="w-5 h-5 text-emerald-500" /> : <CopyIcon className="w-5 h-5" />}
+                   </button>
+                 </div>
+                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-sm font-mono text-slate-600 dark:text-slate-300 whitespace-pre-wrap border border-slate-100 dark:border-slate-800">
+                   {result.geminiImagePrompt}
+                 </div>
+               </div>
+
                {/* Stable Diffusion Card */}
                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative">
                  <div className="flex justify-between items-center mb-4">
@@ -243,7 +256,7 @@ const ImagePromptGenerator: React.FC = () => {
                </div>
 
                {/* DALL-E 3 Card */}
-               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative md:col-span-2">
+               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative">
                  <div className="flex justify-between items-center mb-4">
                    <h3 className="text-lg font-bold text-slate-800 dark:text-white">DALL-E 3</h3>
                    <button onClick={() => handleCopy(result.dallePrompt, 'dalle')} className="text-slate-400 hover:text-pink-500 transition-colors">

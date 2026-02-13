@@ -87,7 +87,7 @@ const VideoPromptGenerator: React.FC = () => {
               Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-indigo-600">Prompt Gen</span>
             </h2>
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
-              Direct your AI scenes. Generate cinematic prompts for Runway Gen-2, Pika, and Sora with precise camera and motion controls.
+              Direct your AI scenes. Generate cinematic prompts for Runway Gen-2, Pika, Sora, and Google Veo with precise camera and motion controls.
             </p>
           </>
         )}
@@ -236,29 +236,42 @@ const VideoPromptGenerator: React.FC = () => {
                  </div>
                </div>
 
-               {/* Sora / Technical Card */}
-               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative md:col-span-2">
+               {/* Veo Card - ADDED */}
+               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative">
                  <div className="flex justify-between items-center mb-4">
-                   <h3 className="text-lg font-bold text-slate-800 dark:text-white">OpenAI Sora & Technical Settings</h3>
+                   <h3 className="text-lg font-bold text-slate-800 dark:text-white">Google Veo (DeepMind)</h3>
+                   <button onClick={() => handleCopy(result.veoPrompt, 'veo')} className="text-slate-400 hover:text-purple-500 transition-colors">
+                     {copiedField === 'veo' ? <CheckIcon className="w-5 h-5 text-emerald-500" /> : <CopyIcon className="w-5 h-5" />}
+                   </button>
+                 </div>
+                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-sm font-mono text-slate-600 dark:text-slate-300 whitespace-pre-wrap border border-slate-100 dark:border-slate-800">
+                   {result.veoPrompt}
+                 </div>
+               </div>
+
+               {/* Sora / Technical Card */}
+               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 relative">
+                 <div className="flex justify-between items-center mb-4">
+                   <h3 className="text-lg font-bold text-slate-800 dark:text-white">OpenAI Sora & Tech Specs</h3>
                    <button onClick={() => handleCopy(result.soraPrompt, 'sora')} className="text-slate-400 hover:text-purple-500 transition-colors">
                      {copiedField === 'sora' ? <CheckIcon className="w-5 h-5 text-emerald-500" /> : <CopyIcon className="w-5 h-5" />}
                    </button>
                  </div>
-                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap border border-slate-100 dark:border-slate-800 mb-4">
+                 <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap border border-slate-100 dark:border-slate-800 mb-4 font-mono">
                    {result.soraPrompt}
                  </div>
-                 <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-100 dark:border-slate-800 text-center">
-                       <div className="text-[10px] font-bold text-slate-400 uppercase">Camera</div>
-                       <div className="text-sm font-mono text-slate-700 dark:text-slate-300">{result.technicalSettings.cameraControl}</div>
+                 <div className="grid grid-cols-3 gap-2">
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg border border-slate-100 dark:border-slate-800 text-center">
+                       <div className="text-[9px] font-bold text-slate-400 uppercase">Camera</div>
+                       <div className="text-xs font-mono text-slate-700 dark:text-slate-300 truncate">{result.technicalSettings.cameraControl}</div>
                     </div>
-                    <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-100 dark:border-slate-800 text-center">
-                       <div className="text-[10px] font-bold text-slate-400 uppercase">Motion Bucket</div>
-                       <div className="text-sm font-mono text-slate-700 dark:text-slate-300">{result.technicalSettings.motionBucket}</div>
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg border border-slate-100 dark:border-slate-800 text-center">
+                       <div className="text-[9px] font-bold text-slate-400 uppercase">Motion</div>
+                       <div className="text-xs font-mono text-slate-700 dark:text-slate-300 truncate">{result.technicalSettings.motionBucket}</div>
                     </div>
-                    <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-100 dark:border-slate-800 text-center">
-                       <div className="text-[10px] font-bold text-slate-400 uppercase">FPS</div>
-                       <div className="text-sm font-mono text-slate-700 dark:text-slate-300">{result.technicalSettings.fps}</div>
+                    <div className="bg-slate-50 dark:bg-slate-950 p-2 rounded-lg border border-slate-100 dark:border-slate-800 text-center">
+                       <div className="text-[9px] font-bold text-slate-400 uppercase">FPS</div>
+                       <div className="text-xs font-mono text-slate-700 dark:text-slate-300 truncate">{result.technicalSettings.fps}</div>
                     </div>
                  </div>
                </div>

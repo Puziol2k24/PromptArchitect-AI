@@ -440,8 +440,8 @@ export const generatePerplexityPrompt = async (config: PerplexityRequestConfig, 
 export const generateImagePrompt = async (config: ImagePromptRequestConfig, signal?: AbortSignal): Promise<ImagePromptResponse> => {
   const targetLanguage = config.language || "English";
   const systemInstruction = `
-    You are an expert Digital Art Director and Prompt Engineer for Midjourney, DALL-E 3, and Stable Diffusion.
-    Create highly detailed, stylized prompts optimized for each model's specific syntax (e.g., --ar for Midjourney, negative prompts for SD).
+    You are an expert Digital Art Director and Prompt Engineer for Midjourney, DALL-E 3, Stable Diffusion, and Google Gemini (Imagen 3).
+    Create highly detailed, stylized prompts optimized for each model's specific syntax (e.g., --ar for Midjourney, natural language for Gemini, negative prompts for SD).
     Return strict JSON.
   `;
 
@@ -459,10 +459,11 @@ export const generateImagePrompt = async (config: ImagePromptRequestConfig, sign
       midjourneyPrompt: { type: Type.STRING },
       dallePrompt: { type: Type.STRING },
       stableDiffusionPrompt: { type: Type.STRING },
+      geminiImagePrompt: { type: Type.STRING }, // Added Gemini Image
       negativePrompt: { type: Type.STRING },
       parameterTips: { type: Type.STRING }
     },
-    required: ["midjourneyPrompt", "dallePrompt", "stableDiffusionPrompt", "negativePrompt", "parameterTips"]
+    required: ["midjourneyPrompt", "dallePrompt", "stableDiffusionPrompt", "geminiImagePrompt", "negativePrompt", "parameterTips"]
   };
 
   try {
@@ -479,8 +480,9 @@ export const generateImagePrompt = async (config: ImagePromptRequestConfig, sign
 export const generateVideoPrompt = async (config: VideoPromptRequestConfig, signal?: AbortSignal): Promise<VideoPromptResponse> => {
   const targetLanguage = config.language || "English";
   const systemInstruction = `
-    You are an expert Video Production Prompter for AI models like Runway Gen-2, Pika Labs, and OpenAI Sora.
+    You are an expert Video Production Prompter for AI models like Runway Gen-2, Pika Labs, OpenAI Sora, and Google Veo.
     Focus on describing motion, camera angles (pan, zoom, tilt), and temporal consistency.
+    For Google Veo, focus on cinematic terminology and physical realism.
     Return strict JSON.
   `;
 
@@ -498,6 +500,7 @@ export const generateVideoPrompt = async (config: VideoPromptRequestConfig, sign
       runwayPrompt: { type: Type.STRING },
       pikaPrompt: { type: Type.STRING },
       soraPrompt: { type: Type.STRING },
+      veoPrompt: { type: Type.STRING }, // Added Veo prompt field
       technicalSettings: {
         type: Type.OBJECT,
         properties: {
@@ -508,7 +511,7 @@ export const generateVideoPrompt = async (config: VideoPromptRequestConfig, sign
         required: ["cameraControl", "motionBucket", "fps"]
       }
     },
-    required: ["runwayPrompt", "pikaPrompt", "soraPrompt", "technicalSettings"]
+    required: ["runwayPrompt", "pikaPrompt", "soraPrompt", "veoPrompt", "technicalSettings"]
   };
 
   try {
