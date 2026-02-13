@@ -1,0 +1,5 @@
+{
+  "name": "PromptArchitect AI",
+  "description": "An advanced prompt engineering tool that generates highly optimized prompts specifically tailored for Google Gemini, OpenAI GPT models, and Anthropic Claude based on a single topic.",
+  "requestFramePermissions": []
+}
