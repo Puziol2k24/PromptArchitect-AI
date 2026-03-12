@@ -4,7 +4,7 @@ import { motion, Variants } from 'framer-motion';
 import { 
   SparklesIcon, TerminalIcon, BeakerIcon, WorkflowIcon, 
   GlobeIcon, ArrowRightIcon, CpuIcon, GridIcon, CheckIcon,
-  ImageIcon, VideoIcon
+  ImageIcon, VideoIcon, FlagIcon
 } from './Icons';
 
 interface HomeProps {
@@ -75,6 +75,15 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       description: 'Visual logic to agent code. The bridge between n8n and AI autonomy.',
       icon: WorkflowIcon,
       color: 'orange',
+      size: 'md'
+    },
+    {
+      id: 'f1-game',
+      name: 'F1 Career Sim',
+      tag: 'Game',
+      description: 'Race from F4 to F1. Build your career, manage teams, and react to starting lights in this mobile-optimised racing career game.',
+      icon: FlagIcon,
+      color: 'red',
       size: 'md'
     }
   ];

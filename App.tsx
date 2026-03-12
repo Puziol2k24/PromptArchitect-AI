@@ -10,13 +10,14 @@ import VideoPromptGenerator from './components/VideoPromptGenerator';
 import HowItWorks from './components/HowItWorks';
 import Home from './components/Home';
 import SettingsModal from './components/SettingsModal';
+import F1CareerGame from './components/F1CareerGame';
 import { 
   SparklesIcon, ChevronDownIcon, HomeIcon, TerminalIcon, 
   BeakerIcon, WorkflowIcon, SettingsIcon, GlobeIcon, 
-  SunIcon, MoonIcon, ImageIcon, VideoIcon
+  SunIcon, MoonIcon, ImageIcon, VideoIcon, FlagIcon
 } from './components/Icons';
 
-type ViewType = 'home' | 'architect' | 'agent' | 'sentinel' | 'n8n' | 'perplexity' | 'image-gen' | 'video-gen' | 'how-it-works';
+type ViewType = 'home' | 'architect' | 'agent' | 'sentinel' | 'n8n' | 'perplexity' | 'image-gen' | 'video-gen' | 'how-it-works' | 'f1-game';
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('home');
@@ -135,6 +136,12 @@ function App() {
                         <WorkflowIcon className="w-4 h-4 text-orange-500" />
                         <span>n8n Architect</span>
                      </button>
+                      <div className="my-2 border-t border-slate-100 dark:border-slate-800"></div>
+                      <div className="px-3 py-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest text-left">Games</div>
+                      <button onClick={() => navigateTo('f1-game')} className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-800 text-left">
+                         <FlagIcon className="w-4 h-4 text-red-500" />
+                         <span>F1 Career Sim</span>
+                      </button>
                    </div>
                  </>
                )}
@@ -164,6 +171,7 @@ function App() {
         {currentView === 'n8n' && <div className="pt-10 animate-fade-in"><N8nAgentGenerator /></div>}
         {currentView === 'image-gen' && <div className="pt-10 animate-fade-in"><ImagePromptGenerator /></div>}
         {currentView === 'video-gen' && <div className="pt-10 animate-fade-in"><VideoPromptGenerator /></div>}
+        {currentView === 'f1-game' && <F1CareerGame />}
       </main>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
